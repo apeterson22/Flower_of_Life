@@ -1,5 +1,5 @@
 from mayavi import mlab
-from common.elements import elements
+from elements import elements
 
 def plot_flower_of_life_with_elements(points):
     mlab.figure(bgcolor=(1, 1, 1))
