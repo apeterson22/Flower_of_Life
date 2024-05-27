@@ -18,18 +18,6 @@ def electric_field(x, y, z, t):
     Ez = np.sin(z * x * t)
     return Ex, Ey, Ez
 
-def update_positions(points, t):
-    updated_points = []
-    for x, y, z in points:
-        Bx, By, Bz = magnetic_field(x, y, z, t)
-        Vx, Vy, Vz = vortex_field(x, y, z, t)
-        Ex, Ey, Ez = electric_field(x, y, z, t)
-        new_x = x + 0.1 * (Bx + Vx + Ex)
-        new_y = y + 0.1 * (By + Vy + Ey)
-        new_z = z + 0.1 * (Bz + Vz + Ez)
-        updated_points.append((new_x, new_y, new_z))
-    return updated_points
-
 def wave_conjugation(x, y, z, t):
     return np.sin(x * t) * np.cos(y * t) * np.sin(z * t)
 
