@@ -6,19 +6,10 @@ from field_simulation import update_positions_with_conjugation
 from geometry import flower_of_life_3d, add_sacred_geometry
 from visualization import plot_flower_of_life_with_elements, plot_points_with_elements
 
-def run_flower_of_life_simulation(radius, layers, t_steps, freq):
-    points = flower_of_life_3d(radius, layers)
-    points = add_sacred_geometry(points, radius, layers)
-    
-    for t in np.linspace(0, 2*np.pi, t_steps):
-        updated_points = update_positions_with_conjugation(points, t, freq)
-        plot_flower_of_life_with_elements(updated_points)
-
-def run_custom_simulation(t_steps, freq):
+def run_custom_simulation(t_steps, freq, vortex_params):
     points = np.random.rand(100, 3)
-    
     for t in np.linspace(0, 2*np.pi, t_steps):
-        updated_points = update_positions_with_conjugation(points, t, freq)
+        updated_points = update_positions_with_conjugation(points, t, vortex_params, freq)
         plot_points_with_elements(updated_points)
 
 def get_user_input():
@@ -34,7 +25,14 @@ def get_user_input():
         layers = simpledialog.askinteger("Input", "Enter the number of layers:")
         run_flower_of_life_simulation(radius, layers, t_steps, freq)
     elif sim_type.lower() == 'custom':
-        run_custom_simulation(t_steps, freq)
+        # Example vortex parameters for the Lynchpin configuration
+        vortex_params = [
+            (0, 0, 1, 1.0, freq, 0),      # Primary vortex
+            (1, -1, 0, 0.8, freq, np.pi/2),   # Secondary vortex 1
+            (-1, 1, 0, 0.8, freq, np.pi),     # Secondary vortex 2
+            (1, 1, 0, 0.8, freq, 3*np.pi/2)   # Secondary vortex 3
+        ]
+        run_custom_simulation(t_steps, freq, vortex_params)
     else:
         print("Invalid simulation type")
 
