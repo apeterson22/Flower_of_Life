@@ -15,7 +15,6 @@ def run_flower_of_life_simulation(radius, layers, t_steps):
         plot_flower_of_life_with_elements(updated_points)
 
 def run_custom_simulation(t_steps):
-    # Example custom simulation with random points
     points = np.random.rand(100, 3)
     
     for t in np.linspace(0, 2*np.pi, t_steps):
